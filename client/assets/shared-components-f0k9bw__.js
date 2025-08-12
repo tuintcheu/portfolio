@@ -1,0 +1,6 @@
+import{r as l,j as e}from"./vendor-8nZXD73_.js";const s=()=>{const[r,a]=l.useState(()=>typeof window<"u"?document.documentElement.classList.contains("dark"):!1);return l.useEffect(()=>{r?(document.documentElement.classList.add("dark"),localStorage.setItem("theme","dark")):(document.documentElement.classList.remove("dark"),localStorage.setItem("theme","light"))},[r]),l.useEffect(()=>{const t=localStorage.getItem("theme");t==="dark"&&a(!0),t==="light"&&a(!1)},[]),e.jsx("button",{onClick:()=>a(t=>!t),className:`
+        fixed top-4 right-4 z-50
+        bg-primary text-white dark:bg-gray-800 dark:text-primary
+        rounded-full p-2 shadow-lg transition
+        hover:scale-110 focus:outline-none
+      `,"aria-label":"Changer le mode sombre/clair",title:"Changer le mode sombre/clair",children:r?e.jsx("svg",{width:"24",height:"24",fill:"currentColor",viewBox:"0 0 24 24",children:e.jsx("path",{d:"M12 4.5V2m0 20v-2.5m7.07-7.07H22m-20 0h2.93m15.36 6.36l1.77 1.77m-17.32 0l1.77-1.77m15.36-6.36l1.77-1.77m-17.32 0l1.77 1.77M12 7a5 5 0 100 10 5 5 0 000-10z"})}):e.jsx("svg",{width:"24",height:"24",fill:"currentColor",viewBox:"0 0 24 24",children:e.jsx("path",{d:"M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"})})})};export{s as T};

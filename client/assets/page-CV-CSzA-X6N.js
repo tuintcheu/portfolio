@@ -1,0 +1,1 @@
+import{j as e}from"./vendor-8nZXD73_.js";const t=()=>e.jsxs("section",{children:[e.jsx("header",{children:e.jsx("h1",{children:"CV"})}),e.jsx("p",{children:"This is the cv page"})]});t.path="/cv";t.metadata={title:"CV",description:"ci joint mon cv"};export{t as C};
