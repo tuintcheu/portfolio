@@ -1,0 +1,39 @@
+/* Load Urbanist and Comfortaa font */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&family=Urbanist:wght@700&display=swap');
+
+/**
+ * These directives tell Tailwind to include the base styles for the project,
+ * any components that are used, and any utilities that are used.
+ * So don't remove them!
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #010314;
+}
+
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+@keyframes fade-in-slow {
+  from { opacity: 0; transform: translateY(40px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+@keyframes fade-in-slower {
+  from { opacity: 0; transform: translateY(60px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+.animate-fade-in { animation: fade-in 0.8s cubic-bezier(.4,0,.2,1) both; }
+.animate-fade-in-slow { animation: fade-in-slow 1.2s cubic-bezier(.4,0,.2,1) both; }
+.animate-fade-in-slower { animation: fade-in-slower 1.6s cubic-bezier(.4,0,.2,1) both; }
