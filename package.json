@@ -6,8 +6,11 @@
   "scripts": {
     "dev": "rasengan dev",
     "build": "rasengan build",
-    "serve": "rasengan-serve ./dist"
+    "serve": "rasengan-serve ./dist",
+    "deploy": "gh-pages -d dist"
+
   },
+  "homepage": "https://tuintcheu.github.io/portfolio",
   "dependencies": {
     "@rasenganjs/image": "^1.0.0",
     "@rasenganjs/mdx": "^1.1.1",
@@ -19,6 +22,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.16",
     "cross-env": "^7.0.3",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.1.3",

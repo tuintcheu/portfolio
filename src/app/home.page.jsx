@@ -1,5 +1,5 @@
-import React from 'react';
-import photo from '@/assets/photo.jpg'; 
+import React from "react";
+import photo from "@/assets/photo.jpg";
 
 const Home = () => {
   return (
@@ -32,7 +32,8 @@ const Home = () => {
           Salut, je suis <span className="text-primary">Tuintcheu Pharel</span>
         </span>
         <span className="block text-gray-600 dark:text-gray-300 mt-1 text-center">
-          Développeur passionné, créatif et rigoureux, prêt à relever tous les défis du web et du mobile.
+          Développeur passionné, créatif et rigoureux, prêt à relever tous les
+          défis du web et du mobile.
         </span>
       </div>
 
@@ -55,7 +56,8 @@ const Home = () => {
           mb-8 text-center max-w-2xl animate-fade-in-slow
         "
       >
-        J'aime concevoir des systèmes performants du frontend au cloud.<br />
+        J'aime concevoir des systèmes performants du frontend au cloud.
+        <br />
         <span className="italic text-primary dark:text-primary">
           “Créer des solutions simples, élégantes, et accessibles.”
         </span>
@@ -64,10 +66,10 @@ const Home = () => {
   );
 };
 
-Home.path = '/';
+Home.path = "/";
 Home.metadata = {
-  title: 'Accueil',
-  description: 'Portfolio - Développeur Fullstack Web & Mobile',
+  title: "Accueil",
+  description: "Portfolio - Développeur Fullstack Web & Mobile",
 };
 
 export default Home;

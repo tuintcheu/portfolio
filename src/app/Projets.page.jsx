@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const projets = [
   {
@@ -8,17 +8,17 @@ const projets = [
     description: "Application mobile moderne pour reserver un ticket de bus.",
     github: "https://github.com/tuintcheu/agence",
     demo: "https://www.canva.com/design/DAGv2DTMe50/faK551TvttbVbLpI_iF7YA/edit?utm_content=DAGv2DTMe50&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
-    type: "mobile"
+    type: "mobile",
   },
   {
     nom: "Amiresto",
     date: "2024",
-    technologies: ["html/css/js", "php","mysql"],
+    technologies: ["html/css/js", "php", "mysql"],
 
     description: "Application web de gestion de restaurant ",
     github: "https://github.com/tuintcheu/resto",
     demo: "",
-    type: "web"
+    type: "web",
   },
   {
     nom: "Quiz-237",
@@ -27,8 +27,8 @@ const projets = [
     description: "Application mobile ",
     github: "https://github.com/tuintcheu/quiz237",
     demo: "https://www.canva.com/design/DAGvxo78Up8/dGewTKGxUQz8HVd4SPfSrQ/edit?utm_content=DAGvxo78Up8&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton",
-    type: "mobile"
-  }
+    type: "mobile",
+  },
 ];
 
 const Projets = () => (
@@ -47,8 +47,12 @@ const Projets = () => (
           "
         >
           <div className="flex items-center justify-between">
-            <span className="text-lg font-bold text-gray-900 dark:text-white">{projet.nom}</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400">{projet.date}</span>
+            <span className="text-lg font-bold text-gray-900 dark:text-white">
+              {projet.nom}
+            </span>
+            <span className="text-xs text-gray-500 dark:text-gray-400">
+              {projet.date}
+            </span>
           </div>
           <div className="flex flex-wrap gap-2">
             {projet.technologies.map((tech, i) => (
@@ -60,7 +64,9 @@ const Projets = () => (
               </span>
             ))}
           </div>
-          <p className="text-gray-700 dark:text-gray-200 text-sm">{projet.description}</p>
+          <p className="text-gray-700 dark:text-gray-200 text-sm">
+            {projet.description}
+          </p>
           <div className="flex gap-4 mt-2">
             {projet.github && (
               <a
@@ -89,10 +95,10 @@ const Projets = () => (
   </section>
 );
 
-Projets.path = '/projets';
+Projets.path = "/projets";
 Projets.metadata = {
-  title: 'Projets',
-  description: 'Mes réalisations web, mobile et backend',
+  title: "Projets",
+  description: "Mes réalisations web, mobile et backend",
 };
 
-export default Projets; 
+export default Projets;
