@@ -12,9 +12,7 @@ import "./assets/page-home-lzepqnkI.js";
 import "./assets/page-about-yVfZytZ9.js";
 import "./assets/shared-components-DgA04djd.js";
 import "./assets/page-Contact-D9FOH8a1.js";
-import "./assets/page-Competences-Teil94Fm.js";
 import "./assets/page-Projets-Cd6ra_A8.js";
-import "./assets/page-CV-zTjvyQ0c.js";
 function App({ Component, children }) {
   return /* @__PURE__ */ jsx(Component, { router: AppRouter, children });
 }

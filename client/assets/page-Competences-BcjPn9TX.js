@@ -1,1 +1,0 @@
-import{j as e}from"./vendor-8nZXD73_.js";const s=()=>e.jsxs("section",{children:[e.jsx("header",{children:e.jsx("h1",{children:"Competences"})}),e.jsx("p",{children:"This is the competences page"})]});s.path="/competences";s.metadata={title:"Competences",description:"mes compétences techniques"};export{s as C};

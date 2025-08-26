@@ -5,9 +5,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import React from "react";
 import { T as ThemeToggle } from "./assets/shared-components-DgA04djd.js";
 import { C as Contact } from "./assets/page-Contact-D9FOH8a1.js";
-import { C as Competences } from "./assets/page-Competences-Teil94Fm.js";
 import { P as Projets } from "./assets/page-Projets-Cd6ra_A8.js";
-import { C as CV } from "./assets/page-CV-zTjvyQ0c.js";
 const Navbar = () => /* @__PURE__ */ jsxs("nav", { className: "w-full flex justify-center gap-4 p-4 bg-#010314", children: [
   /* @__PURE__ */ jsx(Link, { to: "/", className: "text-blue-600 font-bold", children: "Accueil" }),
   /* @__PURE__ */ jsx(Link, { to: "/projets", className: "text-blue-600 font-bold", children: "Projets" }),
@@ -28,7 +26,7 @@ class AppRouter extends RouterComponent {
 const AppRouter$1 = defineRouter({
   imports: [],
   layout: AppLayout,
-  pages: [Home, About, Contact, Competences, Projets, CV]
+  pages: [Home, About, Contact, Projets]
 })(AppRouter);
 export {
   AppRouter$1 as default
