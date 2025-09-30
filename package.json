@@ -6,9 +6,8 @@
   "scripts": {
     "dev": "rasengan dev",
     "build": "rasengan build",
-    "serve": "rasengan-serve ./dist",
+    "serve": "rasengan-serve ./dist --host",
     "deploy": "gh-pages -d dist"
-
   },
   "homepage": "https://tuintcheu.github.io/portfolio",
   "dependencies": {
