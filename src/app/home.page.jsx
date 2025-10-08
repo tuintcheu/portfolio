@@ -1,10 +1,10 @@
 import React from "react";
-import photo from "../assets/photo.jpg";
+import photo from "../assets/avatar.jpg";
 
 const Home = () => { 
 
 
-  
+
   return (
     <section
       className="

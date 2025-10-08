@@ -1,5 +1,5 @@
 import React from 'react';
-import photo from '../assets/photo.jpg'; // Mets ici ta photo pro si tu veux
+import photo from '../assets/avatar.jpg'; // Mets ici ta photo pro si tu veux
 
 const About = () => (
   <section className="min-h-[80vh] bg-[#f5f7fa] dark:bg-[#1a202c] transition-colors duration-500 px-4 py-12 flex flex-col items-center">
