@@ -1,8 +1,13 @@
 import { defineConfig } from "rasengan";
-
+import { rasengan } from "rasengan/plugin";
+import { configure } from "@rasenganjs/vercel";
+ 
 export default defineConfig({
-  server: {
-    host: true, // ← autorise les connexions externes
-    allowedHosts: 'all', // ← ton domaine Render
-  },
+	vite: {
+		plugins: [
+			rasengan({
+				adapter: configure(),
+			}),
+		],
+	},
 });
