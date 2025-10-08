@@ -1,7 +1,10 @@
 import React from "react";
 import photo from "../assets/photo.jpg";
 
-const Home = () => {
+const Home = () => { 
+
+
+  
   return (
     <section
       className="
