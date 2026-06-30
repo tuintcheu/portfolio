@@ -28,10 +28,10 @@ const ThemeToggle = () => {
     <button
       onClick={() => setDark((v) => !v)}
       className="
-        fixed top-4 right-4 z-50
+        fixed bottom-6 right-6 z-50
         bg-primary text-white dark:bg-gray-800 dark:text-primary
-        rounded-full p-2 shadow-lg transition
-        hover:scale-110 focus:outline-none
+        rounded-full p-3 shadow-xl transition
+        hover:scale-110 focus:outline-none focus:ring-2 focus:ring-primary/40
       "
       aria-label="Changer le mode sombre/clair"
       title="Changer le mode sombre/clair"
