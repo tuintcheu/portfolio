@@ -1,88 +1,175 @@
 import React from 'react';
-import photo from '../assets/avatar.jpg';
+import photo from '@/assets/avatar.jpg';
+import Icon from '@/components/Icons';
+import Reveal from '@/components/Reveal';
+import { CallToAction, SectionHeading } from '@/components/Section';
+import { education, experiences, languages, skillGroups } from '@/data/profile';
+import { site } from '@/data/site';
+import { useLanguage } from '@/lib/i18n';
 
-const skills = [
-  { name: 'Flutter', level: 90 },
-  { name: 'React.js', level: 85 },
-  { name: 'TypeScript / JavaScript', level: 85 },
-  { name: 'Tailwind CSS', level: 90 },
-  { name: 'Node.js', level: 75 },
-  { name: 'Firebase', level: 80 },
-];
-
-const About = () => (
-  <section className="min-h-[80vh] bg-[#f5f7fa] dark:bg-[#0b1220] transition-colors duration-500 px-4 py-12">
-    <div className="max-w-5xl mx-auto">
-      <h1 className="text-3xl md:text-4xl font-extrabold text-primary mb-10 text-center animate-fade-in">
-        À propos de moi
-      </h1>
-
-      <div className="flex flex-col md:flex-row items-center md:items-start gap-10 mb-12 animate-fade-in-slow">
-        <div className="flex-shrink-0">
-          <div className="w-40 h-40 md:w-56 md:h-56 rounded-full bg-gradient-to-br from-primary/70 to-blue-300/40 dark:from-primary/80 dark:to-blue-900/40 shadow-lg flex items-center justify-center overflow-hidden border-4 border-white dark:border-gray-800">
-            <img
-              src={photo}
-              alt="Tuintcheu Pharel"
-              className="w-36 h-36 md:w-52 md:h-52 object-cover rounded-full"
-            />
+function Intro() {
+  const { t } = useLanguage();
+  return (
+    <section className="ambient relative overflow-hidden">
+      <div className="grid-bg pointer-events-none absolute inset-0" />
+      <div className="container-page relative grid items-center gap-12 py-16 md:grid-cols-[1.3fr_1fr] md:py-24">
+        <Reveal>
+          <p className="eyebrow mb-5">{t('À propos')}</p>
+          <h1 className="text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
+          {t('Je transforme des idées en')} <span className="text-gradient">{t('produits qui tournent.')}</span>
+          </h1>
+          <div className="mt-8 space-y-4 text-lg leading-relaxed text-muted">
+            <p>
+              {t('Diplômé en Génie Logiciel, je suis')} {t(site.role.toLowerCase())} {t('à Yaoundé. Je conçois des applications mobiles avec')} <strong className="text-fg">Flutter</strong> {t('et des interfaces web modernes avec')} <strong className="text-fg">React</strong>{t(", et je m'occupe aussi du backend qui les fait tourner.")}
+            </p>
+            <p>
+              {t("Chez OSSECA, j'ai contribué à")} <strong className="text-fg">{t('deux applications publiées sur Google Play')}</strong>{' '}
+              {t(" — TOLITOLI et 54UP — de l'interface mobile jusqu'à l'intégration des paiements et de la géolocalisation.")}
+            </p>
+            <p>
+              {t('Ce qui me motive : des interfaces simples, élégantes et accessibles, et un code qui reste fiable une fois en production.')}
+            </p>
           </div>
-        </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            {site.cvUrl && (
+              <a href={site.cvUrl} download className="btn-primary">
+                <Icon name="download" size={18} />
+                {t('Télécharger mon CV')}
+              </a>
+            )}
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+              <Icon name="linkedin" size={18} />
+              LinkedIn
+            </a>
+          </div>
+        </Reveal>
 
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Tuintcheu Pharel</h2>
-          <p className="text-primary font-semibold mb-4">Développeur Frontend & Mobile</p>
-          <p className="text-gray-700 dark:text-gray-200 mb-3 leading-relaxed">
-            Diplômé en Génie Logiciel, passionné par la création d'interfaces utilisateurs intuitives, modernes et performantes.
-          </p>
-          <p className="text-gray-700 dark:text-gray-200 mb-3 leading-relaxed">
-            <span className="font-semibold">Parcours :</span> j'ai contribué à <span className="font-semibold">deux applications mises en production</span> (TOLITOLI et 54UP), de l'interface mobile à l'intégration backend.
-          </p>
-          <p className="text-gray-700 dark:text-gray-200 mb-3 leading-relaxed">
-            <span className="font-semibold">Formation :</span> Licence en Génie Logiciel (Université de Yaoundé I), actuellement en Master Professionnel — Conception et Administration des Systèmes Informatiques (Université Siantou).
-          </p>
-        </div>
-      </div>
-
-      {/* Compétences */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700 animate-fade-in-slow">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary" aria-hidden="true">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-          </svg>
-          Compétences techniques
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-          {skills.map((skill) => (
-            <div key={skill.name}>
-              <div className="flex justify-between mb-1.5">
-                <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">{skill.name}</span>
-                <span className="text-xs text-gray-500 dark:text-gray-400">{skill.level}%</span>
-              </div>
-              <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-primary rounded-full transition-all duration-700"
-                  style={{ width: `${skill.level}%` }}
-                />
-              </div>
+        <Reveal delay={120} className="mx-auto w-full max-w-sm">
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-accent2/40 to-accent/10 blur-2xl" />
+            <div className="relative aspect-square overflow-hidden rounded-full border-4 border-surface bg-surface2 shadow-2xl ring-1 ring-accent/30">
+              <img
+                src={photo}
+                alt={`Portrait de ${site.fullName}`}
+                width="500"
+                height="500"
+                className="h-full w-full scale-[1.1] object-cover"
+              />
             </div>
+          </div>
+          <dl className="card mt-8 grid grid-cols-2 gap-4 p-5 text-sm">
+            <div>
+              <dt className="text-muted">Basé à</dt>
+              <dd className="mt-1 flex items-center gap-1.5 font-semibold">
+                <Icon name="mapPin" size={15} className="text-ink" />
+                {t(site.location)}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-muted">Langues</dt>
+              <dd className="mt-1 font-semibold">{languages.map((l) => `${t(l.name)} (${t(l.level)})`).join(', ')}</dd>
+            </div>
+          </dl>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function Timeline({ items }) {
+  const { t } = useLanguage();
+  return (
+    <ol className="relative space-y-6 border-l border-line/15 pl-8">
+      {items.map((item, i) => (
+        <Reveal as="li" key={item.title} delay={i * 80} className="relative">
+          <span className="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-accent ring-4 ring-bg" />
+          <div className="card p-6">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink">{t(item.period)}</p>
+            <h3 className="mt-2 text-xl font-bold">{t(item.title)}</h3>
+            <p className="text-sm font-medium text-muted">{item.org}</p>
+            {item.points && (
+              <ul className="mt-4 space-y-2">
+                {item.points.map((point) => (
+                  <li key={point} className="flex gap-2.5 text-sm text-fg/85">
+                    <Icon name="check" size={15} className="mt-0.5 shrink-0 text-ink" />
+                  {t(point)}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </Reveal>
+      ))}
+    </ol>
+  );
+}
+
+const About = () => {
+  const { t } = useLanguage();
+  return (
+  <>
+    <Intro />
+
+    <section className="section container-page grid gap-16 lg:grid-cols-2">
+      <div>
+        <SectionHeading eyebrow="Expérience" title="Parcours professionnel" className="mb-10" />
+        <Timeline items={experiences} />
+      </div>
+      <div>
+        <SectionHeading eyebrow="Formation" title="Ce qui m'a formé" className="mb-10" />
+        <Timeline items={education} />
+      </div>
+    </section>
+
+    <section className="section border-t border-line/10 bg-surface/30">
+      <div className="container-page">
+        <SectionHeading
+          eyebrow="Compétences"
+          title="Une stack complète, du mobile au serveur."
+          subtitle="Les technologies que j'utilise au quotidien sur des projets réels."
+        />
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {skillGroups.map((group, i) => (
+            <Reveal key={group.title} delay={i * 80} className="card p-6">
+              <h3 className="text-lg font-bold">{t(group.title)}</h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <span key={item} className="chip-accent">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
+    </section>
 
-      {/* Vision */}
-      <div className="mt-8 p-6 rounded-xl bg-primary/5 dark:bg-primary/10 border-l-4 border-primary animate-fade-in-slower">
-        <p className="text-gray-800 dark:text-gray-100 italic">
-          <span className="font-semibold not-italic">Ma vision :</span> Créer des solutions <span className="text-primary font-semibold">simples</span>, <span className="text-primary font-semibold">élégantes</span> et <span className="text-primary font-semibold">accessibles</span> à tous.
+    <section className="section container-page">
+      <Reveal className="mx-auto max-w-3xl text-center">
+        <p className="eyebrow mb-5">{t('Ma vision')}</p>
+        <p className="font-display text-2xl font-semibold leading-snug sm:text-3xl md:text-4xl">
+          {t('« Créer des solutions')} <span className="text-ink">{t('simples')}</span>, <span className="text-ink">{t('élégantes')}</span>{' '}
+          {t('et')} <span className="text-ink">{t('accessibles')}</span> {t('à tous. »')}
         </p>
-      </div>
-    </div>
-  </section>
-);
+      </Reveal>
+    </section>
+
+    <CallToAction />
+  </>
+  );
+};
 
 About.path = '/about';
 About.metadata = {
-  title: 'À propos',
-  description: 'Présentation, parcours et vision',
+  title: `À propos — ${site.fullName}`,
+  description:
+    'Parcours, expériences (OSSECA, Makiti), formation en Génie Logiciel et compétences de Tuintcheu Pharel, développeur Fullstack Web & Mobile.',
+  openGraph: {
+    title: `À propos — ${site.fullName}`,
+    description: 'Parcours, expériences et compétences de Tuintcheu Pharel.',
+    url: `${site.url}/about`,
+  },
 };
 
 export default About;

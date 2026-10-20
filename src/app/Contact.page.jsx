@@ -1,169 +1,238 @@
 import React, { useState } from 'react';
+import Icon from '@/components/Icons';
+import Reveal from '@/components/Reveal';
+import { PageHeader } from '@/components/Section';
+import { site } from '@/data/site';
+import { useLanguage } from '@/lib/i18n';
 
-const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
+const projectTypes = ['Application mobile', 'Site / app web', 'Backend / API', 'Autre'];
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+const channels = [
+  { icon: 'whatsapp', label: 'WhatsApp', value: site.phone, href: site.whatsapp, hint: 'Le plus rapide' },
+  { icon: 'linkedin', label: 'LinkedIn', value: 'pharel-tuintcheu', href: site.linkedin },
+  { icon: 'github', label: 'GitHub', value: 'tuintcheu', href: site.github },
+];
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Ouvre le client mail avec le contenu pré-rempli
-    const subject = encodeURIComponent(`Contact portfolio — ${form.name}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:leoncepharel60@gmail.com?subject=${subject}&body=${body}`;
-    setSent(true);
+function CopyEmail() {
+  const [copied, setCopied] = useState(false);
+  const { t } = useLanguage();
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(site.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${site.email}`;
+    }
   };
 
   return (
-    <section className="min-h-[80vh] bg-[#f5f7fa] dark:bg-[#0b1220] transition-colors duration-500 px-4 py-12">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-primary mb-3 text-center animate-fade-in">
-          Travaillons ensemble
-        </h1>
-        <p className="text-center text-gray-600 dark:text-gray-300 mb-10 animate-fade-in-slow">
-          Une question, un projet, une opportunité&nbsp;? Je suis à l'écoute.
-        </p>
+    <div className="card flex items-center gap-4 p-5">
+      <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-ink">
+        <Icon name="mail" size={20} />
+      </span>
+      <div className="min-w-0 flex-1">
+        <p className="text-xs text-muted">Email</p>
+        <a href={`mailto:${site.email}`} className="block truncate font-semibold hover:text-ink">
+          {site.email}
+        </a>
+      </div>
+      <button
+        type="button"
+        onClick={copy}
+        className="inline-flex items-center gap-1.5 rounded-full border border-line/15 px-3 py-1.5 text-xs font-semibold transition hover:border-accent/60 hover:text-ink"
+        aria-live="polite"
+      >
+        <Icon name={copied ? 'check' : 'copy'} size={14} />
+        {copied ? t('Copié') : t('Copier')}
+      </button>
+    </div>
+  );
+}
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
-          {/* Formulaire */}
-          <div className="md:col-span-3 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-gray-700 animate-fade-in-slow">
-            {sent ? (
-              <div className="text-center py-8">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/40 mb-4">
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-green-600 dark:text-green-400" aria-hidden="true">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                </div>
-                <p className="text-green-600 dark:text-green-400 font-bold text-lg">
-                  Merci pour votre message&nbsp;!
-                </p>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
-                  Votre client mail s'est ouvert pour finaliser l'envoi.
-                </p>
-              </div>
-            ) : (
-              <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-                <label className="flex flex-col gap-1.5">
-                  <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Votre nom</span>
+const Contact = () => {
+  const { t } = useLanguage();
+  const [form, setForm] = useState({ name: '', email: '', type: projectTypes[0], message: '' });
+  const [opened, setOpened] = useState(false);
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  // Pas de backend : on ouvre la messagerie du visiteur avec le message pré-rempli
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`[Portfolio] ${t(form.type)} — ${form.name}`);
+    const body = encodeURIComponent(`${form.message}\n\n— ${form.name}\n${form.email}`);
+    window.location.href = `mailto:${site.email}?subject=${subject}&body=${body}`;
+    setOpened(true);
+  };
+
+  return (
+    <>
+      <PageHeader
+        eyebrow="Contact"
+        title={
+          <>
+            {t('Travaillons')} <span className="text-gradient">{t('ensemble.')}</span>
+          </>
+        }
+        subtitle="Un projet, une mission, une opportunité ? Décrivez-moi votre besoin en quelques lignes : je reviens vers vous avec une première approche."
+      >
+        <div className="mt-8 flex flex-wrap gap-3 text-sm">
+          {site.available && (
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
+              <span className="h-2 w-2 animate-pulse-ring rounded-full bg-emerald-400" />
+              {t(site.availability)}
+            </span>
+          )}
+          <span className="chip px-4 py-1.5 text-sm">{t(site.responseTime)}</span>
+        </div>
+      </PageHeader>
+
+      <section className="container-page grid gap-8 pb-20 md:pb-28 lg:grid-cols-5">
+        <Reveal className="card p-6 md:p-10 lg:col-span-3">
+          {opened ? (
+            <div className="py-10 text-center" role="status">
+              <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-500">
+                <Icon name="check" size={28} />
+              </span>
+              <h2 className="mt-5 text-2xl font-bold">{t("Votre messagerie s'est ouverte")}</h2>
+              <p className="mx-auto mt-3 max-w-md text-muted">
+                {t("Votre message est pré-rempli : il ne reste plus qu'à l'envoyer. Rien ne s'est ouvert ? Écrivez-moi directement à")} <a href={`mailto:${site.email}`} className="font-semibold text-ink">{site.email}</a> {t('ou sur WhatsApp.')}
+              </p>
+              <button type="button" onClick={() => setOpened(false)} className="btn-ghost mt-6">
+                {t('Modifier mon message')}
+              </button>
+            </div>
+          ) : (
+            <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <label className="flex flex-col gap-2">
+                  <span className="text-sm font-semibold">{t('Votre nom')}</span>
                   <input
                     type="text"
                     name="name"
+                    autoComplete="name"
                     value={form.name}
                     onChange={handleChange}
                     placeholder="Jean Dupont"
                     required
-                    className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary transition"
+                    className="field"
                   />
                 </label>
-                <label className="flex flex-col gap-1.5">
-                  <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Votre email</span>
+                <label className="flex flex-col gap-2">
+                  <span className="text-sm font-semibold">{t('Votre email')}</span>
                   <input
                     type="email"
                     name="email"
+                    autoComplete="email"
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="jean@exemple.com"
+                    placeholder="jean@entreprise.com"
                     required
-                    className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary transition"
+                    className="field"
                   />
                 </label>
-                <label className="flex flex-col gap-1.5">
-                  <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Votre message</span>
-                  <textarea
-                    name="message"
-                    value={form.message}
-                    onChange={handleChange}
-                    placeholder="Parlez-moi de votre projet…"
-                    required
-                    rows={5}
-                    className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary transition resize-none"
-                  />
-                </label>
-                <button
-                  type="submit"
-                  className="bg-primary text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md shadow-primary/20 hover:shadow-primary/40 inline-flex items-center justify-center gap-2"
-                >
-                  Envoyer le message
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <line x1="22" y1="2" x2="11" y2="13" />
-                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                  </svg>
-                </button>
-              </form>
-            )}
-          </div>
-
-          {/* Liens directs */}
-          <div className="md:col-span-2 flex flex-col gap-3 animate-fade-in-slower">
-            <a
-              href="mailto:leoncepharel60@gmail.com"
-              className="flex items-center gap-3 p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition group"
-            >
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                  <polyline points="22,6 12,13 2,6"/>
-                </svg>
-              </span>
-              <div className="flex-1 min-w-0">
-                <div className="text-xs text-gray-500 dark:text-gray-400">Email</div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-white truncate">
-                  leoncepharel60@gmail.com
-                </div>
               </div>
-            </a>
 
+              <fieldset>
+                <legend className="mb-2 text-sm font-semibold">{t('Type de projet')}</legend>
+                <div className="flex flex-wrap gap-2">
+                  {projectTypes.map((type) => (
+                    <label
+                      key={type}
+                      className={`cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-accent ${
+                        form.type === type
+                          ? 'border-accent bg-accent/10 text-ink'
+                          : 'border-line/15 text-muted hover:border-accent/50'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="type"
+                        value={type}
+                        checked={form.type === type}
+                        onChange={handleChange}
+                        className="sr-only"
+                      />
+                      {t(type)}
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <label className="flex flex-col gap-2">
+                <span className="text-sm font-semibold">{t('Votre message')}</span>
+                <textarea
+                  name="message"
+                  value={form.message}
+                  onChange={handleChange}
+                  placeholder={t('Parlez-moi de votre projet : objectif, délai, ce qui existe déjà…')}
+                  required
+                  rows={6}
+                  className="field resize-y"
+                />
+              </label>
+
+              <button type="submit" className="btn-primary mt-1 w-full sm:w-auto sm:self-start">
+                {t('Envoyer le message')}
+                <Icon name="arrowRight" size={18} />
+              </button>
+              <p className="text-xs text-muted">
+                {t('Le bouton ouvre votre application e-mail avec le message pré-rempli.')}
+              </p>
+            </form>
+          )}
+        </Reveal>
+
+        <Reveal delay={120} className="flex flex-col gap-4 lg:col-span-2">
+          <CopyEmail />
+          {channels.map((c) => (
             <a
-              href="https://www.linkedin.com/in/pharel-tuintcheu"
+              key={c.label}
+              href={c.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition group"
+              className="card card-hover group flex items-center gap-4 p-5"
             >
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.74v20.51C0 23.22.8 24 1.77 24h20.45c.97 0 1.78-.78 1.78-1.75V1.74C24 .78 23.19 0 22.22 0z"/>
-                </svg>
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-ink transition group-hover:bg-accent group-hover:text-accent-fg">
+                <Icon name={c.icon} size={20} />
               </span>
               <div className="flex-1">
-                <div className="text-xs text-gray-500 dark:text-gray-400">LinkedIn</div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-white">
-                  pharel-tuintcheu
-                </div>
+                <p className="text-xs text-muted">
+                  {t(c.label)}
+                  {c.hint && <span className="ml-2 text-ink">· {t(c.hint)}</span>}
+                </p>
+                <p className="font-semibold">{c.value}</p>
               </div>
+              <Icon name="arrowUpRight" size={18} className="text-muted transition group-hover:text-ink" />
             </a>
-
-            <a
-              href="https://wa.me/237676816991"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition group"
-            >
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 0 1 8.413 3.488 11.824 11.824 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.51 5.26l.001.002-.999 3.648 3.977-1.609z"/>
-                </svg>
-              </span>
-              <div className="flex-1">
-                <div className="text-xs text-gray-500 dark:text-gray-400">WhatsApp</div>
-                <div className="text-sm font-semibold text-gray-900 dark:text-white">
-                  +237 676 816 991
-                </div>
-              </div>
-            </a>
+          ))}
+          <div className="card flex items-center gap-4 p-5">
+            <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-ink">
+              <Icon name="mapPin" size={20} />
+            </span>
+            <div>
+              <p className="text-xs text-muted">{t('Localisation')}</p>
+              <p className="font-semibold">{t(site.location)}</p>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </Reveal>
+      </section>
+    </>
   );
 };
 
 Contact.path = '/contact';
 Contact.metadata = {
-  title: 'Contact',
-  description: 'Formulaire et liens pour me contacter',
+  title: `Contact — ${site.fullName}`,
+  description:
+    'Contactez Tuintcheu Pharel pour votre application mobile, site web ou backend : email, WhatsApp ou LinkedIn.',
+  openGraph: {
+    title: `Contact — ${site.fullName}`,
+    description: 'Un projet mobile ou web ? Parlons-en.',
+    url: `${site.url}/contact`,
+  },
 };
 
 export default Contact;
