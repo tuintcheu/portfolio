@@ -51,9 +51,9 @@ function Intro() {
               <img
                 src={photo}
                 alt={`Portrait de ${site.fullName}`}
-                width="500"
-                height="500"
-                className="h-full w-full scale-[1.1] object-cover"
+                width="720"
+                height="720"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>
