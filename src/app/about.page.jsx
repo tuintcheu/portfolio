@@ -32,7 +32,7 @@ function Intro() {
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             {site.cvUrl && (
-              <a href={site.cvUrl} download className="btn-primary">
+              <a href={site.cvUrl} download={site.cvFileName} className="btn-primary">
                 <Icon name="download" size={18} />
                 {t('Télécharger mon CV')}
               </a>

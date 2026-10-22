@@ -46,8 +46,10 @@ src/
     profile.js          services, compétences, expériences, formation, méthode
   lib/theme.js          thème clair/sombre + couleur d'accent (voir plus bas)
   styles/index.css      tokens CSS, classes de composants (.btn-primary, .card…)
+  assets/
+    avatar.jpg              photo (navbar, footer, À propos) : 720 px, < 100 Ko
+    cv-pharel-tuintcheu.pdf CV téléchargeable, importé en `?url` dans site.js
 public/
-  cv-pharel-tuintcheu.pdf   CV téléchargeable (site.cvUrl)
   favicon.svg, robots.txt
 ```
 
@@ -65,7 +67,11 @@ Chaque page exporte `Page.path` et `Page.metadata` (`title`, `description`, `ope
 
 ### Règles de contenu (important)
 
-- Les faits (postes, dates, diplômes, technos) viennent du CV `public/cv-pharel-tuintcheu.pdf`.
+- Les faits (postes, dates, diplômes, technos) viennent du CV `src/assets/cv-pharel-tuintcheu.pdf`.
+  Il est importé via Vite (`?url`) : son URL contient une empreinte qui change à chaque
+  nouvelle version, ce qui évite qu'un cache serve l'ancien CV. Ne pas le remettre dans `public/`.
+  Le CV reprend les couleurs du site (colonne `#0b0a08 → #1e1b15`, or `#f5b921`, or foncé
+  `#87661a` pour le texte doré sur fond blanc).
   Le site et le CV doivent rester cohérents : un recruteur compare les deux.
 - **Ne jamais inventer** de chiffres, clients, témoignages ou années d'expérience.
   Les stats du hero sont volontairement vérifiables (2 apps sur Google Play, 2 entreprises,

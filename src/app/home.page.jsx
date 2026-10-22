@@ -84,7 +84,7 @@ function Hero() {
               {t('Me contacter')}
             </Link>
             {site.cvUrl && (
-              <a href={site.cvUrl} download className="btn-link">
+              <a href={site.cvUrl} download={site.cvFileName} className="btn-link">
                 <Icon name="download" size={18} />
                 {t('Télécharger mon CV')}
               </a>

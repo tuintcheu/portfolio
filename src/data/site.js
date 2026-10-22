@@ -1,7 +1,10 @@
 // Source unique des informations personnelles affichées sur le site.
-// Les faits viennent du CV (public/cv-pharel-tuintcheu.pdf) : garder les deux synchronisés.
+// Les faits viennent du CV (src/assets/cv-pharel-tuintcheu.pdf) : garder les deux synchronisés.
 
 import { projects } from '@/data/projects';
+// Importé via Vite : l'URL contient une empreinte qui change à chaque nouvelle version du CV,
+// donc aucun navigateur ni CDN ne peut servir l'ancien fichier en cache.
+import cvFile from '@/assets/cv-pharel-tuintcheu.pdf?url';
 
 export const site = {
   firstName: 'Tuintcheu',
@@ -26,7 +29,8 @@ export const site = {
   github: 'https://github.com/tuintcheu',
   linkedin: 'https://www.linkedin.com/in/pharel-tuintcheu',
   // Mettre à null pour masquer le bouton « Télécharger mon CV »
-  cvUrl: '/cv-pharel-tuintcheu.pdf',
+  cvUrl: cvFile,
+  cvFileName: 'CV_Pharel_Tuintcheu.pdf',
 };
 
 // Uniquement des chiffres vérifiables : un recruteur compare avec le CV.
